@@ -31,4 +31,4 @@ jobs:
     - name: Push new data files back to repo
       uses: stefanzweifel/git-auto-commit-action@v4
       with:
-        commit_message: Apply php-cs-fixer changes
+        commit_message: "AUTO: update RTD data files"
