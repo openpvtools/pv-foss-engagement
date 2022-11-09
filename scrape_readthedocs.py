@@ -16,7 +16,13 @@ import datetime
 import logging
 import sys
 
-project_names = ['pvlib-python', 'rdtools', 'pvanalytics']
+project_names = [
+    'panel-segmentation',
+    'pvanalytics',
+    'pvlib-python',
+    'rdtools',
+    'twoaxistracking',
+]
 
 logging.basicConfig(
     level=logging.DEBUG, 
