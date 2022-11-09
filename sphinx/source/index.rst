@@ -21,6 +21,8 @@ photovoltaics space.
    pvlib-python
    rdtools
    pvanalytics
+   twoaxistracking
+   panel-segmentation
 
 
 Indices and tables
