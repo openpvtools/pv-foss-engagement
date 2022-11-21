@@ -1,4 +1,4 @@
-sphinx==5.1.1
+sphinx==4.4.0
 jupyter-sphinx==0.4.0
 pandas==1.4.4
 numpy==1.23.3
