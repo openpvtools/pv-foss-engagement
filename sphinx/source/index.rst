@@ -1,5 +1,5 @@
-ReadTheDocs Statistics for FOSS PV Software
-===========================================
+Engagement Statistics for FOSS PV Software
+==========================================
 
 Tracking engagement for open-source software is challenging, but
 engagement statistics are helpful in securing development and
