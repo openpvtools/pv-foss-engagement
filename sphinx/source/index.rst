@@ -9,20 +9,82 @@ This website summarizes datasets like GitHub star count and
 ReadTheDocs page view analytics for several open-source
 software packages in the solar photovoltaics space.
 
+.. grid:: 1 2 3 3
+    :gutter: 3
+
+    .. grid-item-card:: pvlib-python
+        :link: ./project/pvlib-python.html
+        :img-top: https://pvlib-python.readthedocs.io/en/stable/_images/pvlib_logo_horiz.png
+
+        ^^^
+        pvlib-python is a package for simulating the electrical performance of
+        solar photovoltaic power systems.
+        +++
+
+        .. raw:: html
+
+           <img src="https://img.shields.io/github/stars/pvlib/pvlib-python?style=social"/>
+
+    .. grid-item-card:: rdtools
+        :link: ./project/rdtools.html
+        :img-top: https://rdtools.readthedocs.io/en/stable/_images/logo_horizontal_highres.png
+
+        ^^^
+        RdTools is an open-source library to support reproducible technical analysis of
+        time series data from photovoltaic energy systems.
+        +++
+
+        .. raw:: html
+
+           <img src="https://img.shields.io/github/stars/nrel/rdtools?style=social"/>
+
+    .. grid-item-card:: pvanalytics
+        :link: ./project/pvanalytics.html
+        :img-top: _static/pvanalytics_thumbnail.png
+
+        ^^^
+        PVAnalytics is a python library that supports analytics for PV systems. It provides functions
+        for quality control, filtering, and feature labeling and other tools supporting the analysis of PV system-level data.
+        +++
+
+        .. raw:: html
+
+           <img src="https://img.shields.io/github/stars/pvlib/pvanalytics?style=social"/>
+
+    .. grid-item-card:: twoaxistracking
+        :link: ./project/twoaxistracking.html
+        :img-top: https://twoaxistracking.readthedocs.io/en/stable/_static/twoaxistracking_logo.svg
+
+        ^^^
+        twoaxistracking is a python package for simulating two-axis tracking solar collectors, particularly self-shading.
+        +++
+
+        .. raw:: html
+
+           <img src="https://img.shields.io/github/stars/pvlib/twoaxistracking?style=social"/>
+
+    .. grid-item-card:: panel-segmentation
+        :link: ./project/panel-segmentation.html
+        :img-top: _static/panel-segmentation-thumbnail.png
+
+        ^^^
+        Panel-Segmentation is a package for automated metadata extraction of solar PV installations
+        using satellite imagery coupled with computer vision techniques. 
+        +++
+
+        .. raw:: html
+
+           <img src="https://img.shields.io/github/stars/nrel/panel-segmentation?style=social"/>
+
+
+
 .. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+   :maxdepth: 1
+   :caption: Projects:
+   :hidden:
 
-   pvlib-python
-   rdtools
-   pvanalytics
-   twoaxistracking
-   panel-segmentation
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+   project/pvlib-python
+   project/rdtools
+   project/pvanalytics
+   project/twoaxistracking
+   project/panel-segmentation

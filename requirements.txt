@@ -8,3 +8,4 @@ matplotlib==3.6.1
 nbsphinx==0.8.9
 pydata-sphinx-theme==0.11.0
 bokeh==2.4.3
+sphinx-design==0.3.0
