@@ -1,11 +1,14 @@
 
 import pandas as pd
 import pathlib
+import requests
+import re
+import os
 
 datadir = pathlib.Path(__file__).parent.parent.parent / 'data'
 
 
-def get_analytics_data(project):
+def get_rtd_analytics_data(project):
     filenames = sorted(datadir.glob(project + "*"))
     dfs = [pd.read_csv(fn, parse_dates=True) for fn in filenames]
     df = pd.concat(dfs)
@@ -28,3 +31,41 @@ def get_analytics_data(project):
     df = df.reset_index(drop=True)
     return df
 
+
+user = os.getenv('GH_USERNAME')
+token = os.getenv('GH_TOKEN')
+auth = (user, token)
+
+
+def _fetch_gh_api(repo, page=None):
+    '''return API json response, plus the max page count'''
+    url = f'https://api.github.com/repos/{repo}/stargazers'
+    if page is not None:
+        url += f"?page={page}"
+    #print(url)
+    # necessary to get starred_at data:
+    headers = {'Accept': 'application/vnd.github.v3.star+json'}
+    response = requests.get(url, headers=headers, auth=auth)
+
+    data = response.json()
+    try:
+        link_text = response.headers['link']
+        matches = re.findall(r'page=(\d*)', link_text)
+        page_numbers = map(lambda s: int(s.split("=")[-1]), matches)
+        N = max(page_numbers)
+    except KeyError:
+        N = 1
+    return data, N
+
+
+def get_github_stars(repo):
+    data, N = _fetch_gh_api(repo)
+    for i in range(2, N+1):
+        data.extend(_fetch_gh_api(repo, i)[0])
+
+    star_date = [d['starred_at'] for d in data]
+    user_name = [d['user']['login'] for d in data]
+    df = pd.DataFrame({'star_date': star_date, 'user_name': user_name})
+    df['star_date'] = pd.to_datetime(df['star_date'])
+    df = df.sort_values('star_date')
+    return df
