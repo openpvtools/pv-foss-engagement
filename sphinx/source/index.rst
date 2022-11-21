@@ -76,6 +76,44 @@ software packages in the solar photovoltaics space.
 
            <img src="https://img.shields.io/github/stars/nrel/panel-segmentation?style=social"/>
 
+    .. grid-item-card:: bifacial_radiance
+        :link: ./project/bifacial_radiance.html
+        :img-top: https://bifacial-radiance.readthedocs.io/en/latest/_images/bifacial_radiance.png
+
+        ^^^
+        bifacial_radiance is a toolkit for working with RADIANCE for the
+        ray-trace modeling of bifacial photovoltaic systems.
+        +++
+
+        .. raw:: html
+
+           <img src="https://img.shields.io/github/stars/nrel/bifacial_radiance?style=social"/>
+
+    .. grid-item-card:: bifacialvf
+        :link: ./project/bifacialvf.html
+        :img-top: https://bifacialvf.readthedocs.io/en/latest/_images/bifacialVF.png
+
+        ^^^
+        bifacialvf is a 2-D viewfactor model for modeling front- and rear-side irradiance
+        in solar PV arrays. 
+        +++
+
+        .. raw:: html
+
+           <img src="https://img.shields.io/github/stars/nrel/bifacialvf?style=social"/>
+
+    .. grid-item-card:: PV_ICE
+        :link: ./project/pv_ice.html
+        :img-top: https://pv-ice.readthedocs.io/en/latest/_images/CE-MFC.png
+
+        ^^^
+        An open-source tool to quantify Solar Photovoltaics (PV) Energy and Mass Flows
+        in the Circular Economy, from a Reliability and Lifetime approach.
+        +++
+
+        .. raw:: html
+
+           <img src="https://img.shields.io/github/stars/nrel/pv_ice?style=social"/>
 
 
 .. toctree::
@@ -88,3 +126,6 @@ software packages in the solar photovoltaics space.
    project/pvanalytics
    project/twoaxistracking
    project/panel-segmentation
+   project/bifacial_radiance
+   project/bifacialvf
+   project/pv_ice
