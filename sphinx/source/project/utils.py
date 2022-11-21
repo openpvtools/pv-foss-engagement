@@ -5,7 +5,7 @@ import requests
 import re
 import os
 
-datadir = pathlib.Path(__file__).parent.parent.parent / 'data'
+datadir = pathlib.Path(__file__).parent.parent.parent.parent / 'data'
 
 
 def get_rtd_analytics_data(project):
