@@ -76,6 +76,30 @@ software packages in the solar photovoltaics space.
 
            <img src="https://img.shields.io/github/stars/nrel/panel-segmentation?style=social"/>
 
+    .. grid-item-card:: pvfactors
+        :link: ./project/pvfactors.html
+        :img-top: https://sunpower.github.io/pvfactors/_images/logo.png
+
+        ^^^
+        pvfactors is a 2-D viewfactor model for simulating front- and rear-side irradiance
+        by accounting for all reflections between surfaces.
+        +++
+
+        .. raw:: html
+
+           <img src="https://img.shields.io/github/stars/sunpower/pvfactors?style=social"/>
+
+    .. grid-item-card:: PVMismatch
+        :link: ./project/pvmismatch.html
+        :img-top: _static/pvmismatch_thumbnail.png
+
+        ^^^
+        An explicit IV & PV curve trace calculator for PV system circuits.
+        +++
+
+        .. raw:: html
+
+           <img src="https://img.shields.io/github/stars/sunpower/pvmismatch?style=social"/>
 
 
 .. toctree::
@@ -88,3 +112,6 @@ software packages in the solar photovoltaics space.
    project/pvanalytics
    project/twoaxistracking
    project/panel-segmentation
+   project/pvfactors
+   project/pvmismatch
+   
