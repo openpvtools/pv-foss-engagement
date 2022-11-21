@@ -44,7 +44,7 @@ software packages in the solar photovoltaics space.
 
         ^^^
         PVAnalytics is a python library that supports analytics for PV systems. It provides functions
-        for quality control, filtering, and feature labeling and other tools supporting the analysis of PV system-level data.
+        for quality control, filtering, feature labeling, and other tools.
         +++
 
         .. raw:: html
@@ -80,9 +80,9 @@ software packages in the solar photovoltaics space.
 
 .. toctree::
    :maxdepth: 1
-   :caption: Projects:
    :hidden:
 
+   Project Index<self>
    project/pvlib-python
    project/rdtools
    project/pvanalytics
