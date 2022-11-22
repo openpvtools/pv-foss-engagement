@@ -26,13 +26,7 @@
     }
    ],
    "source": [
-    "from utils import get_github_stars\n",
-    "import pandas as pd\n",
-    "import numpy as np\n",
-    "import datetime\n",
-    "\n",
-    "from bokeh.plotting import figure, show\n",
-    "from bokeh.models import HoverTool\n",
+    "import utils\n",
     "from bokeh.io import output_notebook"
    ]
   },
@@ -361,7 +355,7 @@
    "metadata": {},
    "outputs": [],
    "source": [
-    "gh = get_github_stars('sunpower/pvfactors')"
+    "gh = utils.get_github_stars('sunpower/pvfactors')"
    ]
   },
   {
@@ -419,20 +413,7 @@
     }
    ],
    "source": [
-    "star_curve = gh.set_index('star_date').assign(x=1).x.cumsum().resample('d').max()\n",
-    "# project out to present:\n",
-    "star_curve = pd.concat([star_curve, pd.Series({datetime.datetime.utcnow(): np.nan})])\n",
-    "star_curve = star_curve.ffill()\n",
-    "\n",
-    "p = figure(height=350, x_axis_type=\"datetime\")\n",
-    "hover_tool = HoverTool(tooltips=[('Date', '@x{%Y-%m-%d}'), ('Total Stars', '@y')],\n",
-    "                       formatters={'@x': 'datetime'})\n",
-    "hover_tool.point_policy = 'snap_to_data'\n",
-    "p.add_tools(hover_tool)\n",
-    "\n",
-    "p.line(star_curve.index, star_curve)\n",
-    "p.yaxis.axis_label = 'Total Stars'\n",
-    "p.xaxis.axis_label = 'Date'\n",
+    "p = utils.plot_github_stars_timeseries(gh)\n",
     "show(p)"
    ]
   }
