@@ -22,6 +22,7 @@ project_names = [
     'pvlib-python',
     'rdtools',
     'twoaxistracking',
+    'openpvtools',
 ]
 
 logging.basicConfig(
