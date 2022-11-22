@@ -140,6 +140,18 @@ software packages in the solar photovoltaics space.
 
            <img src="https://img.shields.io/github/stars/nrel/pv_ice?style=social"/>
 
+    .. grid-item-card:: openpvtools
+        :link: ./project/openpvtools.html
+        :img-top: _static/openpvtools_thumbnail.png
+
+        ^^^
+        A catalog of open source tools for solar energy.
+        +++
+
+        .. raw:: html
+
+           <img src="https://img.shields.io/github/stars/openpvtools/openpvtools?style=social"/>
+
 
 .. toctree::
    :maxdepth: 1
@@ -156,3 +168,4 @@ software packages in the solar photovoltaics space.
    project/pvfactors
    project/pvmismatch
    project/pv_ice
+   project/openpvtools
