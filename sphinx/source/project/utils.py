@@ -4,6 +4,11 @@ import pathlib
 import requests
 import re
 import os
+import numpy as np
+import datetime
+
+from bokeh.plotting import figure
+from bokeh.models import HoverTool
 
 datadir = pathlib.Path(__file__).parent.parent.parent.parent / 'data'
 
@@ -69,3 +74,21 @@ def get_github_stars(repo):
     df['star_date'] = pd.to_datetime(df['star_date'])
     df = df.sort_values('star_date')
     return df
+
+
+def plot_github_stars_timeseries(gh):
+    star_curve = gh.set_index('star_date').assign(x=1).x.cumsum().resample('d').max()
+    # project out to present:
+    star_curve = pd.concat([star_curve, pd.Series({datetime.datetime.utcnow(): np.nan})])
+    star_curve = star_curve.ffill()
+
+    p = figure(height=350, x_axis_type="datetime")
+    hover_tool = HoverTool(tooltips=[('Date', '@x{%Y-%m-%d}'), ('Total Stars', '@y')],
+                           formatters={'@x': 'datetime'})
+    hover_tool.point_policy = 'snap_to_data'
+    p.add_tools(hover_tool)
+
+    p.line(star_curve.index, star_curve)
+    p.yaxis.axis_label = 'Total Stars'
+    p.xaxis.axis_label = 'Date'
+    return p
