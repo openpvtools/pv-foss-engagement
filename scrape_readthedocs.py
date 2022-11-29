@@ -17,7 +17,7 @@ import logging
 import sys
 
 project_names = [
-    'bifacial_radiance',
+    'bifacial-radiance',
     'bifacialvf',
     'openpvtools',
     'panel-segmentation',
