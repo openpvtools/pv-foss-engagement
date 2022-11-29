@@ -4,23 +4,12 @@ This repository tracks and summarizes engagement statistics for several
 open-source software projects related to solar photovoltaics.
 See https://kanderso-nrel.github.io/pv-foss-engagement/
 
-Currently this project tracks statistics for:
+The summaries are computed by jupyter notebooks which essentially act as
+webpage templates and are located at [/sphinx/source/project](/sphinx/source/project).
+The results stored in the notebook files may be out of date, but because the notebooks
+are automatically re-run when building the website, the website itself will reflect
+the updated data as of the time of build.
 
-- [bifacial_radiance]( https://github.com/NREL/bifacial_radiance)
-- [bifacialvf]( https://github.com/NREL/bifacialvf)
-- [openpvtools](https://github.com/openpvtools/openpvtools)
-- [Panel-Segmentation](https://github.com/NREL/Panel-Segmentation)
-- [PV_ICE](https://github.com/NREL/PV_ICE)
-- [pvanalytics](https://github.com/pvlib/pvanalytics)
-- [pvlib-python](https://github.com/pvlib/pvlib-python)
-- [py-smarts](https://github.com/NREL/py-SMARTS)
-- [RdTools](https://github.com/NREL/rdtools)
-- [twoaxistracking](https://github.com/pvlib/twoaxistracking)
-
-The summaries are computed in jupyter notebooks stored in this repository.
-The notebooks in this repo may be out of date, but they are automatically
-re-run when building the website, so the website itself will usually
-reflect more recent data.
 The website is automatically rebuilt any time the `main` branch is updated, meaning
 the website will update by itself whenever new data is added to the repo or
 the notebooks are updated.
