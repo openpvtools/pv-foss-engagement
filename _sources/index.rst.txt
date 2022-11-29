@@ -152,6 +152,18 @@ software packages in the solar photovoltaics space.
 
            <img src="https://img.shields.io/github/stars/openpvtools/openpvtools?style=social"/>
 
+    .. grid-item-card:: pySMARTS
+        :link: ./project/py-smarts.html
+        :img-top: https://raw.githubusercontent.com/NREL/pySMARTS/main/docs/images/py-SMARTS.PNG
+
+        ^^^
+        Python wrapper for SMARTS2, Simple Model of the Atmospheric Radiative Transfer of Sunshine 
+        +++
+
+        .. raw:: html
+
+           <img src="https://img.shields.io/github/stars/nrel/pysmarts?style=social"/>
+
 
 .. toctree::
    :maxdepth: 1
