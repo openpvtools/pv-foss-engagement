@@ -17,12 +17,16 @@ import logging
 import sys
 
 project_names = [
+    'bifacial_radiance',
+    'bifacialvf',
+    'openpvtools',
     'panel-segmentation',
+    'pv_ice',
     'pvanalytics',
     'pvlib-python',
+    'py-smarts',
     'rdtools',
     'twoaxistracking',
-    'openpvtools',
 ]
 
 logging.basicConfig(

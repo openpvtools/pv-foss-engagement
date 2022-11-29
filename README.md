@@ -6,11 +6,16 @@ See https://kanderso-nrel.github.io/pv-foss-engagement/
 
 Currently this project tracks statistics for:
 
-- [pvlib-python](https://github.com/pvlib/pvlib-python)
-- [RdTools](https://github.com/NREL/rdtools)
-- [pvanalytics](https://github.com/pvlib/pvanalytics)
-- [twoaxistracking](https://github.com/pvlib/twoaxistracking)
+- [bifacial_radiance]( https://github.com/NREL/bifacial_radiance)
+- [bifacialvf]( https://github.com/NREL/bifacialvf)
+- [openpvtools](https://github.com/openpvtools/openpvtools)
 - [Panel-Segmentation](https://github.com/NREL/Panel-Segmentation)
+- [PV_ICE](https://github.com/NREL/PV_ICE)
+- [pvanalytics](https://github.com/pvlib/pvanalytics)
+- [pvlib-python](https://github.com/pvlib/pvlib-python)
+- [py-smarts](https://github.com/NREL/py-SMARTS)
+- [RdTools](https://github.com/NREL/rdtools)
+- [twoaxistracking](https://github.com/pvlib/twoaxistracking)
 
 The summaries are computed in jupyter notebooks stored in this repository.
 The notebooks in this repo may be out of date, but they are automatically
