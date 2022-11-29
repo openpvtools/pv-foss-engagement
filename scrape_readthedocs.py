@@ -21,7 +21,7 @@ project_names = [
     'bifacialvf',
     'openpvtools',
     'panel-segmentation',
-    'pv_ice',
+    'pv-ice',
     'pvanalytics',
     'pvlib-python',
     'py-smarts',
