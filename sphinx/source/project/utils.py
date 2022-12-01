@@ -6,6 +6,8 @@ import re
 import os
 import numpy as np
 import datetime
+from PIL import Image
+import random
 
 from bokeh.plotting import figure
 from bokeh.models import HoverTool
@@ -90,5 +92,90 @@ def plot_github_stars_timeseries(gh):
 
     p.line(star_curve.index, star_curve)
     p.yaxis.axis_label = 'Total Stars'
+    p.xaxis.axis_label = 'Date'
+    return p
+
+
+def get_github_contributors(repo):
+    url = f"https://api.github.com/repos/{repo}/contributors?per_page=100"
+    headers = {'Accept': 'application/vnd.github+json'}
+    auth = (user, token)
+    response = requests.get(url, headers=headers, auth=auth)
+    contributor_data = response.json()
+
+    if len(contributor_data) == 100:
+        raise ValueError("You need to generalize this code to handle multiple pages")
+
+    return contributor_data
+
+
+def make_github_contributors_mosaic(contributor_data, n_wide=None, n_high=None):
+    images = []
+    for contributor in contributor_data:
+        response = requests.get(contributor['avatar_url'], stream=True)
+        images.append(Image.open(response.raw))
+
+    # randomize order
+    random.shuffle(images)
+
+    widths, heights = zip(*(i.size for i in images))
+
+    if n_wide is None:
+        n_wide = 10
+        n_high = len(images) // n_wide + 1
+
+    image_width = 60
+    image_height = 60
+    buffer = 5
+
+    total_width = image_width * n_wide + buffer * (n_wide-1)
+    total_height = image_height * n_high + buffer * (n_high-1)
+
+    new_im = Image.new('RGBA', (total_width, total_height), color=(255, 255, 255))
+
+    x_offset = 0
+    y_offset = 0
+    for i, im in enumerate(images):
+        im = im.resize((image_width, image_height))
+        new_im.paste(im, (x_offset, y_offset))
+        x_offset += image_width + buffer
+        if (i % n_wide) == (n_wide - 1):
+            x_offset = 0
+            y_offset += image_height + buffer
+
+    return new_im
+
+
+def get_github_contributor_timeseries(repo):
+    url = f"https://github.com/{repo}/graphs/contributors-data"
+    response = requests.get(url, headers={"Accept": "application/json"})
+        
+    js = response.json()
+    first_commit_dates = []
+    for record in js:
+        username = record['author']['login']
+        weekdata = record['weeks']
+        first = min([x for x in weekdata if x['c'] > 0], key=lambda x: x['w'])
+        ts = pd.to_datetime(first['w'], unit='s')
+        first_commit_dates.append(ts)
+    
+    s = pd.Series(1, index=first_commit_dates)
+    out = s.sort_index().resample('d').sum().replace(0, np.nan).cumsum().ffill()
+    return out
+
+
+def plot_github_contributors_timeseries(gh):
+    # project out to present:
+    gh = pd.concat([gh, pd.Series({datetime.datetime.utcnow(): np.nan})])
+    gh = gh.ffill()
+
+    p = figure(height=350, x_axis_type="datetime")
+    hover_tool = HoverTool(tooltips=[('Date', '@x{%Y-%m-%d}'), ('Total Contributors', '@y')],
+                           formatters={'@x': 'datetime'})
+    hover_tool.point_policy = 'snap_to_data'
+    p.add_tools(hover_tool)
+
+    p.line(gh.index, gh)
+    p.yaxis.axis_label = 'Total Contributors'
     p.xaxis.axis_label = 'Date'
     return p

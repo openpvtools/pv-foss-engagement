@@ -181,3 +181,4 @@ software packages in the solar photovoltaics space.
    project/pvmismatch
    project/pv_ice
    project/openpvtools
+   project/py-smarts
