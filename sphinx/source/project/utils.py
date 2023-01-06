@@ -8,6 +8,7 @@ import numpy as np
 import datetime
 from PIL import Image
 import random
+import time
 
 from bokeh.plotting import figure
 from bokeh.models import HoverTool
@@ -146,11 +147,25 @@ def make_github_contributors_mosaic(contributor_data, n_wide=None, n_high=None):
     return new_im
 
 
-def get_github_contributor_timeseries(repo):
+def get_github_contributor_timeseries(repo, max_retries=10, retry_delay=10):
     url = f"https://github.com/{repo}/graphs/contributors-data"
-    response = requests.get(url, headers={"Accept": "application/json"})
-        
-    js = response.json()
+    
+    # I don't 100% understand this, but I think if this data hasn't been
+    # regenerated in a while, the initial request comes back empty while
+    # the data gets refreshed on the server side.  You just have to poll it
+    # until you get something back.
+    for _ in range(max_retries):
+        response = requests.get(url, headers={"Accept": "application/json"})
+        try:
+            js = response.json()
+        except:
+            time.sleep(retry_delay)
+            pass
+        else:
+            break
+    else:
+        raise Exception("Could not fetch contributor data")
+
     first_commit_dates = []
     for record in js:
         username = record['author']['login']
