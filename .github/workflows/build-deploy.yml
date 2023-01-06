@@ -22,7 +22,10 @@ jobs:
         sudo apt-get install pandoc
         pip install -r requirements.txt
 
-    - name: Build docs
+    - name: Sphinx build
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_USERNAME: ${{ secrets.GH_USERNAME }}
       run: |
         cd sphinx && make html
 
