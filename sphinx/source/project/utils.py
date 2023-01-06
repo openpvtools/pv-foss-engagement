@@ -166,17 +166,22 @@ def get_github_contributor_timeseries(repo, max_retries=10, retry_delay=10):
     else:
         raise Exception("Could not fetch contributor data")
 
+    commits_by_week = {}
     first_commit_dates = []
     for record in js:
         username = record['author']['login']
         weekdata = record['weeks']
         first = min([x for x in weekdata if x['c'] > 0], key=lambda x: x['w'])
-        ts = pd.to_datetime(first['w'], unit='s')
-        first_commit_dates.append(ts)
+        commits = pd.Series([w['c'] for w in weekdata], pd.to_datetime([w['w'] for w in weekdata], unit='s'))
+        first_commit_dates.append(commits[commits > 0].index[0])
+        commits_by_week[username] = commits
     
     s = pd.Series(1, index=first_commit_dates)
-    out = s.sort_index().resample('d').sum().replace(0, np.nan).cumsum().ffill()
-    return out
+    cumulative_contributors = s.sort_index().resample('d').sum().replace(0, np.nan).cumsum().ffill()
+
+    commits_by_week = pd.DataFrame(commits_by_week)
+    annual_unique_contributors = (commits_by_week.resample('a').sum() > 0).sum(axis=1)
+    return cumulative_contributors, annual_unique_contributors
 
 
 def plot_github_contributors_timeseries(gh):
