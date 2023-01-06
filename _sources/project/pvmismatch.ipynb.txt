@@ -473,7 +473,7 @@
     }
    ],
    "source": [
-    "contributor_ts = utils.get_github_contributor_timeseries(\"sunpower/pvmismatch\")\n",
+    "contributor_ts, _ = utils.get_github_contributor_timeseries(\"sunpower/pvmismatch\")\n",
     "p = utils.plot_github_contributors_timeseries(contributor_ts)\n",
     "show(p)"
    ]

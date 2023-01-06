@@ -485,7 +485,7 @@
    "metadata": {},
    "outputs": [],
    "source": [
-    "contributors = utils.get_github_contributors('sunpower/pvfactors')"
+    "contributors, _ = utils.get_github_contributors('sunpower/pvfactors')"
    ]
   },
   {
