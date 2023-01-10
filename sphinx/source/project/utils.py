@@ -40,6 +40,16 @@ def get_rtd_analytics_data(project):
     return df
 
 
+def fyq_format(s):
+    quarter = s.dt.quarter.values
+    year = s.dt.year.values
+    filt = quarter == 4
+    year[filt] += 1
+    quarter[filt] = 1
+    quarter[~filt] += 1
+    return 'Q' + pd.Series(quarter, index=s.index).astype(str) + 'FY' + pd.Series(year, index=s.index).astype(str).str[-2:]
+
+
 user = os.getenv('GH_USERNAME')
 token = os.getenv('GH_TOKEN')
 auth = (user, token)
