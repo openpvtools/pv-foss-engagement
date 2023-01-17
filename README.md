@@ -2,7 +2,7 @@
 
 This repository tracks and summarizes engagement statistics for several
 open-source software projects related to solar photovoltaics.
-See https://kanderso-nrel.github.io/pv-foss-engagement/
+See https://openpvtools.github.io/pv-foss-engagement/
 
 The summaries are computed by jupyter notebooks which essentially act as
 webpage templates and are located at [/sphinx/source/project](/sphinx/source/project).
@@ -16,13 +16,15 @@ the notebooks are updated.
 
 Currently, this project uses two sources of data:
 
-## GitHub stars
+## GitHub stars/contributors
 
 GitHub stars over time are retrieved from GitHub's "stargazers" API.  For now,
 this project only summarizes the current dataset returned from that API.
 That means that it only summarizes the users currently starring the project;
 it has no concept of users that previously starred the project but later
-unstarred it.
+unstarred it.  Contributor data is also retrieved, although "contributor"
+in this context refers only to commit authors, which is of course one of
+several types of project contributors.
 
 ## ReadTheDocs page views
 
