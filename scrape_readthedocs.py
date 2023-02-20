@@ -23,6 +23,7 @@ project_names = [
     'panel-segmentation',
     'pv-ice',
     'pvanalytics',
+    'pvcaptest',
     'pvlib-python',
     'py-smarts',
     'rdtools',
