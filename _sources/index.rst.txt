@@ -51,6 +51,19 @@ software packages in the solar photovoltaics space.
 
            <img src="https://img.shields.io/github/stars/pvlib/pvanalytics?style=social"/>
 
+    .. grid-item-card:: pvcaptest
+        :link: ./project/pvcaptest.html
+        :img-top: https://pvcaptest.readthedocs.io/en/latest/_images/pvcaptest_logo.png
+
+        ^^^
+        pvcaptest is intended to facilitate capacity testing following
+        ASTM E2848 - Standard Test Method for Reporting Photovoltaic Non-Concentrator System Performance.
+        +++
+
+        .. raw:: html
+
+           <img src="https://img.shields.io./github/stars/pvcaptest/pvcaptest?style=social"/>
+
     .. grid-item-card:: twoaxistracking
         :link: ./project/twoaxistracking.html
         :img-top: https://twoaxistracking.readthedocs.io/en/stable/_static/twoaxistracking_logo.svg
@@ -173,6 +186,7 @@ software packages in the solar photovoltaics space.
    project/pvlib-python
    project/rdtools
    project/pvanalytics
+   project/pvcaptest
    project/twoaxistracking
    project/panel-segmentation
    project/bifacial_radiance
