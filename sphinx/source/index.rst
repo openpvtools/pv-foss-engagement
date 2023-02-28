@@ -33,7 +33,9 @@ Project Index
                 pvlib-python is a package for simulating the electrical performance of
                 solar photovoltaic power systems.
 
-                .. image:: https://img.shields.io/github/stars/pvlib/pvlib-python?style=social
+                |pvlib-stars|
+
+                .. |pvlib-stars| image:: https://img.shields.io/github/stars/pvlib/pvlib-python?style=social
                     :target: https://github.com/pvlib/pvlib-python
 
 -----
@@ -59,7 +61,9 @@ Project Index
                 RdTools is an open-source library to support reproducible technical analysis of
                 time series data from photovoltaic energy systems.
 
-                .. image:: https://img.shields.io/github/stars/nrel/rdtools?style=social
+                |rdtools-stars|
+
+                .. |rdtools-stars| image:: https://img.shields.io/github/stars/nrel/rdtools?style=social
                     :target: https://github.com/nrel/rdtools
 
 -----
@@ -85,7 +89,9 @@ Project Index
                 PVAnalytics is a python library that supports analytics for PV systems. It provides functions
                 for quality control, filtering, feature labeling, and other tools.
 
-                .. image:: https://img.shields.io/github/stars/pvlib/pvanalytics?style=social
+                |pvanalytics-stars|
+
+                .. |pvanalytics-stars| image:: https://img.shields.io/github/stars/pvlib/pvanalytics?style=social
                     :target: https://github.com/pvlib/pvanalytics
 
 -----
@@ -111,7 +117,9 @@ Project Index
                 pvcaptest is intended to facilitate capacity testing following
                 ASTM E2848 - Standard Test Method for Reporting Photovoltaic Non-Concentrator System Performance.
 
-                .. image:: https://img.shields.io/github/stars/pvcaptest/pvcaptest?style=social
+                |pvcaptest-stars|
+
+                .. |pvcaptest-stars| image:: https://img.shields.io/github/stars/pvcaptest/pvcaptest?style=social
                     :target: https://github.com/pvcaptest/pvcaptest
 
 -----
@@ -136,7 +144,9 @@ Project Index
 
                 twoaxistracking is a python package for simulating two-axis tracking solar collectors, particularly self-shading.
 
-                .. image:: https://img.shields.io/github/stars/pvlib/twoaxistracking?style=social
+                |twoaxistracking-stars|
+
+                .. |twoaxistracking-stars| image:: https://img.shields.io/github/stars/pvlib/twoaxistracking?style=social
                     :target: https://github.com/pvlib/twoaxistracking
 
 -----
@@ -162,7 +172,9 @@ Project Index
                 Panel-Segmentation is a package for automated metadata extraction of solar PV installations
                 using satellite imagery coupled with computer vision techniques. 
 
-                .. image:: https://img.shields.io/github/stars/nrel/panel-segmentation?style=social
+                |panel-segmentation-stars|
+
+                .. |panel-segmentation-stars| image:: https://img.shields.io/github/stars/nrel/panel-segmentation?style=social
                     :target: https://github.com/nrel/panel-segmentation
 
 -----
@@ -188,7 +200,9 @@ Project Index
                 bifacial_radiance is a toolkit for working with RADIANCE for the
                 ray-trace modeling of bifacial photovoltaic systems.
 
-                .. image:: https://img.shields.io/github/stars/nrel/bifacial_radiance?style=social
+                |bifacial_radiance-stars|
+
+                .. |bifacial_radiance-stars| image:: https://img.shields.io/github/stars/nrel/bifacial_radiance?style=social
                     :target: https://github.com/nrel/bifacial_radiance
 
 -----
@@ -213,8 +227,10 @@ Project Index
 
                 bifacialvf is a 2-D viewfactor model for modeling front- and rear-side irradiance
                 in solar PV arrays. 
+                
+                |bifacialvf-stars|
 
-                .. image:: https://img.shields.io/github/stars/nrel/bifacialvf?style=social
+                .. |bifacialvf-stars| image:: https://img.shields.io/github/stars/nrel/bifacialvf?style=social
                     :target: https://github.com/nrel/bifacialvf
 
 -----
@@ -239,8 +255,10 @@ Project Index
 
                 pvfactors is a 2-D viewfactor model for simulating front- and rear-side irradiance
                 by accounting for all reflections between surfaces.
+                
+                |pvfactors-stars|
 
-                .. image:: https://img.shields.io/github/stars/sunpower/pvfactors?style=social
+                .. |pvfactors-stars| image:: https://img.shields.io/github/stars/sunpower/pvfactors?style=social
                     :target: https://github.com/sunpower/pvfactors
 
 -----
@@ -264,8 +282,10 @@ Project Index
                 :columns: 9
 
                 An explicit IV & PV curve trace calculator for PV system circuits.
+                
+                |pvmismatch-stars|
 
-                .. image:: https://img.shields.io/github/stars/sunpower/pvmismatch?style=social
+                .. |pvmismatch-stars| image:: https://img.shields.io/github/stars/sunpower/pvmismatch?style=social
                     :target: https://github.com/sunpower/pvmismatch
 
 -----
@@ -290,8 +310,10 @@ Project Index
 
                 An open-source tool to quantify Solar Photovoltaics (PV) Energy and Mass Flows
                 in the Circular Economy, from a Reliability and Lifetime approach.
+                
+                |pv_ice-stars|
 
-                .. image:: https://img.shields.io/github/stars/nrel/pv_ice?style=social
+                .. |pv_ice-stars| image:: https://img.shields.io/github/stars/nrel/pv_ice?style=social
                     :target: https://github.com/nrel/pv_ice
 
 -----
@@ -315,8 +337,10 @@ Project Index
                 :columns: 9
 
                 A catalog of open source tools for solar energy.
+                
+                |openpvtools-stars|
 
-                .. image:: https://img.shields.io/github/stars/openpvtools/openpvtools?style=social
+                .. |openpvtools-stars| image:: https://img.shields.io/github/stars/openpvtools/openpvtools?style=social
                     :target: https://github.com/openpvtools/openpvtools
 
 -----
@@ -341,7 +365,9 @@ Project Index
 
                 Python wrapper for SMARTS2, Simple Model of the Atmospheric Radiative Transfer of Sunshine 
 
-                .. image:: https://img.shields.io/github/stars/nrel/pysmarts?style=social
+                |pysmarts-stars|
+
+                .. |pysmarts-stars| image:: https://img.shields.io/github/stars/nrel/pysmarts?style=social
                     :target: https://github.com/nrel/pysmarts
 
 
