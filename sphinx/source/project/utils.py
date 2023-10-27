@@ -60,7 +60,6 @@ def _fetch_gh_api(repo, page=None):
     url = f'https://api.github.com/repos/{repo}/stargazers'
     if page is not None:
         url += f"?page={page}"
-    #print(url)
     # necessary to get starred_at data:
     headers = {'Accept': 'application/vnd.github.v3.star+json'}
     response = requests.get(url, headers=headers, auth=auth)
@@ -108,14 +107,21 @@ def plot_github_stars_timeseries(gh):
 
 
 def get_github_contributors(repo):
-    url = f"https://api.github.com/repos/{repo}/contributors?per_page=100"
     headers = {'Accept': 'application/vnd.github+json'}
     auth = (user, token)
-    response = requests.get(url, headers=headers, auth=auth)
-    contributor_data = response.json()
+    page_number = 1
+    contributor_data = []
 
-    if len(contributor_data) == 100:
-        raise ValueError("You need to generalize this code to handle multiple pages")
+    while True:
+        url = f"https://api.github.com/repos/{repo}/contributors?per_page=100&page={page_number}"
+        response = requests.get(url, headers=headers, auth=auth)
+        chunk = response.json()
+        contributor_data.extend(chunk)
+
+        if len(chunk) < 100:
+            break
+
+        page_number += 1
 
     return contributor_data
 
