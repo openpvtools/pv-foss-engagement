@@ -27,6 +27,7 @@ project_names = [
     'pvlib-python',
     'py-smarts',
     'rdtools',
+    'solarfactors',
     'twoaxistracking',
 ]
 
