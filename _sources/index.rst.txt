@@ -177,6 +177,18 @@ software packages in the solar photovoltaics space.
 
            <img src="https://img.shields.io/github/stars/nrel/pysmarts?style=social"/>
 
+    .. grid-item-card:: solarfactors
+        :link: ./project/solarfactors.html
+        :img-top: https://sunpower.github.io/pvfactors/_images/logo.png
+
+        ^^^
+        solarfactors is a maintained fork of pvfactors, a 2-D viewfactor model for simulating
+        front- and rear-side irradiances by accounting for all reflections between surfaces.
+        +++
+
+        .. raw:: html
+
+           <img src="https://img.shields.io/github/stars/pvlib/solarfactors?style=social"/>
 
 .. toctree::
    :maxdepth: 1
@@ -196,3 +208,4 @@ software packages in the solar photovoltaics space.
    project/pv_ice
    project/openpvtools
    project/py-smarts
+   project/solarfactors
