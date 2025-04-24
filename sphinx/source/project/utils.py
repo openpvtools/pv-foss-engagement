@@ -226,7 +226,7 @@ def get_github_forks(repo):
     records = []
     page = 1
     while True:
-        print(page)
+        # print(page)
         response = requests.get(url, params=dict(per_page=100, page=page), headers=headers)
         json = response.json()
         records += json
@@ -261,7 +261,7 @@ def get_github_pull_requests(repo, start='2010-01-01', end='2030-01-01'):
     records = []
     page = 1
     while True:
-        print(page)
+        # print(page)
         response = requests.get(url, params=dict(q=query, per_page=100, page=page), headers=headers)
         json = response.json()
         records += json['items']
