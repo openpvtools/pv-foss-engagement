@@ -215,3 +215,72 @@ def plot_github_contributors_timeseries(gh):
     p.yaxis.axis_label = 'Total Contributors'
     p.xaxis.axis_label = 'Date'
     return p
+
+
+def get_github_forks(repo):
+    url = f"https://api.github.com/repos/{repo}/forks"
+    headers = {
+      'Authorization': token,
+    }
+
+    records = []
+    page = 1
+    while True:
+        # print(page)
+        response = requests.get(url, params=dict(per_page=100, page=page), headers=headers)
+        json = response.json()
+        records += json
+        if len(json) < 100:
+            break
+        page += 1
+
+    info = []
+    for record in records:
+        result = {}
+        result['repo'] = record['full_name']
+        result['created_at'] = pd.to_datetime(record['created_at'])        
+        info.append(result)
+
+    df = pd.DataFrame(info)
+    cumulative_forks = pd.Series(1, index=df['created_at']).sort_index().cumsum().resample('a').max()
+
+    return cumulative_forks
+
+
+def get_github_pull_requests(repo, start='2010-01-01', end='2030-01-01'):
+    url = 'https://api.github.com/search/issues'
+    headers = {
+      'Authorization': token,
+    }
+    query = ' '.join([
+        f'repo:{repo}',
+        'is:pr',
+        'merged:' + start + '..' + end,
+    ])
+
+    records = []
+    page = 1
+    while True:
+        # print(page)
+        response = requests.get(url, params=dict(q=query, per_page=100, page=page), headers=headers)
+        json = response.json()
+        records += json['items']
+        if len(json['items']) < 100:
+            break
+        page += 1
+
+    info = []
+    for record in records:
+        result = {}
+        for key in ['number', 'title']:
+            result[key] = record[key]
+
+        result['merged_at'] = pd.to_datetime(record['pull_request']['merged_at'])
+        result['author'] = record['user']['login']
+        
+        info.append(result)
+
+    df = pd.DataFrame(info)
+    cumulative_prs = pd.Series(1, index=df['merged_at']).sort_index().cumsum().resample('a').max()
+
+    return cumulative_prs
