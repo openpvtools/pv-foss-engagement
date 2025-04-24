@@ -13,18 +13,7 @@
    "execution_count": 1,
    "id": "7fd1c91b-b8c5-4523-b450-6ec20e325a20",
    "metadata": {},
-   "outputs": [
-    {
-     "name": "stderr",
-     "output_type": "stream",
-     "text": [
-      "C:\\Users\\KANDERSO\\Software\\Anaconda3\\envs\\dev\\lib\\site-packages\\numpy\\_distributor_init.py:30: UserWarning: loaded more than 1 DLL from .libs:\n",
-      "C:\\Users\\KANDERSO\\Software\\Anaconda3\\envs\\dev\\lib\\site-packages\\numpy\\.libs\\libopenblas.EL2C6PLE4ZYW3ECEVIV3OXXGRN2NRFM2.gfortran-win_amd64.dll\n",
-      "C:\\Users\\KANDERSO\\Software\\Anaconda3\\envs\\dev\\lib\\site-packages\\numpy\\.libs\\libopenblas.FB5AE2TYXYH2IJRDKGDGQ3XBKLKTF43H.gfortran-win_amd64.dll\n",
-      "  warnings.warn(\"loaded more than 1 DLL from .libs:\"\n"
-     ]
-    }
-   ],
+   "outputs": [],
    "source": [
     "import utils\n",
     "import pandas as pd\n",
@@ -936,6 +925,11 @@
     "    'v0.10.2': '2023-09-21',\n",
     "    'v0.10.3': '2023-12-20',\n",
     "    'v0.10.4': '2024-03-19',\n",
+    "    'v0.10.5': '2024-05-06',\n",
+    "    'v0.11.0': '2024-06-21',\n",
+    "    'v0.11.1': '2024-09-26',\n",
+    "    'v0.11.2': '2024-12-16',\n",
+    "    'v0.12.0': '2025-03-19',\n",
     "}\n",
     "stable = df.loc[df['Version'] == 'stable', :].copy()\n",
     "stable['Real_Version'] = '?'\n",
@@ -991,7 +985,9 @@
    "cell_type": "code",
    "execution_count": 13,
    "id": "71b935e4-d64e-4aa7-a558-144454ae1624",
-   "metadata": {},
+   "metadata": {
+    "scrolled": true
+   },
    "outputs": [
     {
      "data": {
@@ -1043,6 +1039,56 @@
    ],
    "source": [
     "p = utils.plot_github_stars_timeseries(gh)\n",
+    "show(p)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "id": "43ab86da-4c43-4ef3-91ff-ab5bd48bac74",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "forks = utils.get_github_forks('pvlib/pvlib-python')\n",
+    "forks = pd.DataFrame({'year': forks.index.year, 'forks': forks})"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "fa877794-8a1e-49c3-8975-031dd76e80a2",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "p = figure(height=350, tooltips=[(\"Cumulative forks\", \"@forks\"), (\"Year\", \"@year\")],\n",
+    "           title=\"Cumulative forks\")\n",
+    "p.vbar(x='year', top='forks', width=0.75, source=forks)\n",
+    "p.yaxis.axis_label = 'Total forks'\n",
+    "show(p)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "1e524e9e-bfb4-4fcc-855d-67ad507dddd5",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "prs = utils.get_github_pull_requests('pvlib/pvlib-python')\n",
+    "prs = pd.DataFrame({'year': prs.index.year, 'prs': prs})"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "923aa8c1-ccfc-4d33-9821-9d7d16a4bf69",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "p = figure(height=350, tooltips=[(\"Cumulative PRs\", \"@prs\"), (\"Year\", \"@year\")],\n",
+    "           title=\"Cumulative PRs\")\n",
+    "p.vbar(x='year', top='prs', width=0.75, source=prs)\n",
+    "p.yaxis.axis_label = 'Total PRs'\n",
     "show(p)"
    ]
   },
@@ -1241,7 +1287,7 @@
    "name": "python",
    "nbconvert_exporter": "python",
    "pygments_lexer": "ipython3",
-   "version": "3.9.12"
+   "version": "3.9.21"
   }
  },
  "nbformat": 4,
