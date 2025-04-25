@@ -1,0 +1,210 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "id": "9a51a013-8798-4327-bd2b-5aaf0427cda4",
+   "metadata": {},
+   "source": [
+    "# solar-data-tools"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "7fd1c91b-b8c5-4523-b450-6ec20e325a20",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import utils\n",
+    "import pandas as pd\n",
+    "\n",
+    "from bokeh.plotting import figure, show\n",
+    "from bokeh.models import HoverTool\n",
+    "from bokeh.transform import jitter\n",
+    "from bokeh.io import output_notebook"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "c29a742f-afdc-4643-a075-05291935c913",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "output_notebook()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "cec855e6-7639-4429-bcc3-6d6086c59470",
+   "metadata": {},
+   "source": [
+    "## GitHub\n",
+    "\n",
+    "The following plots summarize a subset of all community members that we call \"contributors\"; it is based on git commit authorship and thus excludes people that file bug reports, contribute to development discussions, and so on."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "96bb65ea-a47a-419e-8d0e-7f50e01387dc",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "gh = utils.get_github_stars('slacgismo/solar-data-tools')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "71b935e4-d64e-4aa7-a558-144454ae1624",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "p = utils.plot_github_stars_timeseries(gh)\n",
+    "show(p)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "43ab86da-4c43-4ef3-91ff-ab5bd48bac74",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "forks = utils.get_github_forks('slacgismo/solar-data-tools')\n",
+    "forks = pd.DataFrame({'year': forks.index.year, 'forks': forks})"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "fa877794-8a1e-49c3-8975-031dd76e80a2",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "p = figure(height=350, tooltips=[(\"Cumulative forks\", \"@forks\"), (\"Year\", \"@year\")],\n",
+    "           title=\"Cumulative forks\")\n",
+    "p.vbar(x='year', top='forks', width=0.75, source=forks)\n",
+    "p.yaxis.axis_label = 'Total forks'\n",
+    "show(p)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "1e524e9e-bfb4-4fcc-855d-67ad507dddd5",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "prs = utils.get_github_pull_requests('slacgismo/solar-data-tools')\n",
+    "prs = pd.DataFrame({'year': prs.index.year, 'prs': prs})"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "923aa8c1-ccfc-4d33-9821-9d7d16a4bf69",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "p = figure(height=350, tooltips=[(\"Cumulative PRs\", \"@prs\"), (\"Year\", \"@year\")],\n",
+    "           title=\"Cumulative PRs\")\n",
+    "p.vbar(x='year', top='prs', width=0.75, source=prs)\n",
+    "p.yaxis.axis_label = 'Total PRs'\n",
+    "show(p)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "b5213376-9027-46b0-8fc9-4c0c168a6c72",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "cumulative_contributors, annual_unique_contributors = utils.get_github_contributor_timeseries(\"slacgismo/solar-data-tools\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "d99ae463-a0ba-46e2-8321-62cb26406dac",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "p = utils.plot_github_contributors_timeseries(cumulative_contributors)\n",
+    "show(p)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "d3782c2a-e82f-4f1d-a9fa-952f34b1741b",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "annual_unique_contributors.index = annual_unique_contributors.index.strftime('%Y')\n",
+    "annual_unique_contributors = annual_unique_contributors.reset_index()\n",
+    "annual_unique_contributors.columns = ['year', 'count']\n",
+    "\n",
+    "p = figure(x_range=annual_unique_contributors['year'], height=350,\n",
+    "           tooltips=[(\"Year\", \"@year\"), (\"Unique Code Contributors\", \"@count\")],\n",
+    "           title=f\"Unique Code Contributors by Year\",)\n",
+    "p.vbar(x='year', top='count', width=0.75, source=annual_unique_contributors,\n",
+    "       line_color='white')\n",
+    "p.yaxis.axis_label = 'Unique Code Contributors'\n",
+    "show(p)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "93f335d7-09ba-4efb-887d-e54d518b6389",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "contributor_images = utils.get_github_contributors('slacgismo/solar-data-tools')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "130e792b-072f-47ca-8b81-74a02e95ac4e",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "mosaic = utils.make_github_contributors_mosaic(contributor_images)\n",
+    "mosaic"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "f4107cf5-9cc9-4969-b1b4-74b37e88fdc0",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.9.21"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
