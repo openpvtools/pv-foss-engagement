@@ -57,9 +57,6 @@ software packages in the solar photovoltaics space.
 
         ^^^
         Solar Data Tools is an open-source Python library for analyzing PV power (and irradiance) time-series data.
-        It was developed to enable analysis of unlabeled PV data, i.e. with no model, no meteorological data, and
-        no performance index required, by taking a statistical signal processing approach in the algorithms used in
-        the package’s main data processing pipeline.
         +++
 
         .. raw:: html
