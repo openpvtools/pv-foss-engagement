@@ -51,7 +51,7 @@ session = requests.Session()
 
 # first, load the login page and get this mysterious csrf token
 logging.debug('requesting login page')
-response = session.get("https://readthedocs.org/accounts/login/")
+response = session.get("https://app.readthedocs.org/accounts/login/")
 response.raise_for_status()
 
 soup = bs4.BeautifulSoup(response.content, features='html.parser')
@@ -59,10 +59,10 @@ token = soup.find(attrs={'name': 'csrfmiddlewaretoken'}).attrs['value']
 
 # now send in our credentials
 logging.debug('posting credentials')
-data = {'csrfmiddlewaretoken': token, 'login': username, 'password': password}
-response = session.post("https://readthedocs.org/accounts/login/",
+data = {'csrfmiddlewaretoken': token, 'login': username, 'password': password, 'next': '/dashboard/'}
+response = session.post("https://app.readthedocs.org/accounts/login/",
                         data=data,
-                        headers={"referer": "https://readthedocs.org/accounts/login/"})
+                        headers={"referer": "https://app.readthedocs.org/accounts/login/?next=/dashboard/"})
 response.raise_for_status()
 logging.debug('login successful')
 
