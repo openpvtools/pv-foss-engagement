@@ -16,13 +16,14 @@ the notebooks are updated.
 
 Currently, this project uses two sources of data:
 
-## GitHub stars/contributors
+## GitHub stars/forks/PRs/contributors
 
 GitHub stars over time are retrieved from GitHub's "stargazers" API.  For now,
 this project only summarizes the current dataset returned from that API.
 That means that it only summarizes the users currently starring the project;
 it has no concept of users that previously starred the project but later
-unstarred it.  Contributor data is also retrieved, although "contributor"
+unstarred it.  The same is true for forks.
+Contributor data is also retrieved, although "contributor"
 in this context refers only to commit authors, which is of course one of
 several types of project contributors.
 
