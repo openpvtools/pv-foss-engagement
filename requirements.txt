@@ -1,5 +1,6 @@
 sphinx==4.4.0
 jupyter-sphinx==0.4.0
+ipython==8.18.1
 ipykernel==6.21.3
 pandas==1.5.0
 numpy==1.23.3
