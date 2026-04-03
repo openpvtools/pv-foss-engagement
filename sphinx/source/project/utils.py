@@ -65,10 +65,6 @@ def _fetch_gh_api(repo, page=None):
     response = requests.get(url, headers=headers, auth=auth)
 
     data = response.json()
-
-    if isinstance(data, dict) and data.get('status', None) != 200:
-        raise Exception(data)
-
     try:
         link_text = response.headers['link']
         matches = re.findall(r'page=(\d*)', link_text)
@@ -76,6 +72,10 @@ def _fetch_gh_api(repo, page=None):
         N = max(page_numbers)
     except KeyError:
         N = 1
+    
+    if isinstance(data, dict) and data.get('status', None) != 200:
+        raise Exception(data)
+    
     return data, N
 
 
@@ -111,7 +111,10 @@ def plot_github_stars_timeseries(gh):
 
 
 def get_github_contributors(repo):
-    headers = {'Accept': 'application/vnd.github+json'}
+    headers = {
+        'Authorization': "Bearer " + token,
+        'Accept': 'application/vnd.github+json'
+    }
     auth = (user, token)
     page_number = 1
     contributor_data = []
@@ -170,12 +173,17 @@ def make_github_contributors_mosaic(contributor_data, n_wide=None, n_high=None):
 def get_github_contributor_timeseries(repo, max_retries=10, retry_delay=10):
     url = f"https://github.com/{repo}/graphs/contributors-data"
     
+    headers = {
+      'Authorization': "Bearer " + token,
+      "Accept": "application/json",
+    }
+
     # I don't 100% understand this, but I think if this data hasn't been
     # regenerated in a while, the initial request comes back empty while
     # the data gets refreshed on the server side.  You just have to poll it
     # until you get something back.
     for _ in range(max_retries):
-        response = requests.get(url, headers={"Accept": "application/json"})
+        response = requests.get(url, headers=headers)
         try:
             js = response.json()
         except:
@@ -224,7 +232,7 @@ def plot_github_contributors_timeseries(gh):
 def get_github_forks(repo):
     url = f"https://api.github.com/repos/{repo}/forks"
     headers = {
-      'Authorization': token,
+      'Authorization': "Bearer " + token,
     }
 
     records = []
@@ -232,6 +240,7 @@ def get_github_forks(repo):
     while True:
         # print(page)
         response = requests.get(url, params=dict(per_page=100, page=page), headers=headers)
+        response.raise_for_status()
         json = response.json()
         records += json
         if len(json) < 100:
@@ -254,7 +263,7 @@ def get_github_forks(repo):
 def get_github_pull_requests(repo, start='2010-01-01', end='2030-01-01'):
     url = 'https://api.github.com/search/issues'
     headers = {
-      'Authorization': token,
+      'Authorization': "Bearer " + token,
     }
     query = ' '.join([
         f'repo:{repo}',
@@ -267,6 +276,7 @@ def get_github_pull_requests(repo, start='2010-01-01', end='2030-01-01'):
     while True:
         # print(page)
         response = requests.get(url, params=dict(q=query, per_page=100, page=page), headers=headers)
+        response.raise_for_status()
         json = response.json()
         records += json['items']
         if len(json['items']) < 100:
