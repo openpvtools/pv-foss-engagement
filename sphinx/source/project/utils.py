@@ -65,6 +65,10 @@ def _fetch_gh_api(repo, page=None):
     response = requests.get(url, headers=headers, auth=auth)
 
     data = response.json()
+
+    if isinstance(data, dict) and data.get('status', None) != 200:
+        raise Exception(data)
+
     try:
         link_text = response.headers['link']
         matches = re.findall(r'page=(\d*)', link_text)
