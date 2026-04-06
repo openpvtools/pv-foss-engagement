@@ -53,7 +53,7 @@ software packages in the solar photovoltaics space.
 
     .. grid-item-card:: solar-data-tools
         :link: ./project/solar-data-tools.html
-        :img-top: https://raw.githubusercontent.com/slacgismo/solar-data-tools/main/docs/source/_static/SDT_v1_secondary_blue_text.png
+        :img-top: https://raw.githubusercontent.com/NatLabRockies/solar-data-tools/main/docs/source/_static/SDT_v1_secondary_blue_text.png
 
         ^^^
         Solar Data Tools is an open-source Python library for analyzing PV power (and irradiance) time-series data.
@@ -61,7 +61,7 @@ software packages in the solar photovoltaics space.
 
         .. raw:: html
 
-           <img src="https://img.shields.io/github/stars/slacgismo/solar-data-tools?style=social"/>
+           <img src="https://img.shields.io/github/stars/NatLabRockies/solar-data-tools?style=social"/>
 
     .. grid-item-card:: pvcaptest
         :link: ./project/pvcaptest.html
