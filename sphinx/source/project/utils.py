@@ -300,22 +300,27 @@ def _get_github_pull_requests(repo, start='2010-01-01', end='2030-01-01'):
         info.append(result)
 
     df = pd.DataFrame(info)
-    cumulative_prs = pd.Series(1, index=df['merged_at']).sort_index().cumsum().resample('a').max()
+    annual_prs = pd.Series(1, index=df['merged_at']).resample('a').sum()
 
-    return cumulative_prs
+    return annual_prs
 
 
-def get_github_pull_requests(repo, start='2010-01-01', end='2030-01-01'):
+def _get_github_pull_requests_recurse(repo, start, end):
     start = pd.to_datetime(start)
     end = pd.to_datetime(end)
     try:
-        cumulative_prs = _get_github_pull_requests(repo, start.strftime("%Y-%m-%d"), end.strftime("%Y-%m-%d"))
+        annual_prs = _get_github_pull_requests(repo, start.strftime("%Y-%m-%d"), end.strftime("%Y-%m-%d"))
     except RuntimeError:
         # too many results; make smaller requests
         diff = end - start
         middle = start + diff / 2
-        cumulative_prs1 = get_github_pull_requests(repo, start.strftime("%Y-%m-%d"), middle.strftime("%Y-%m-%d"))
-        cumulative_prs2 = get_github_pull_requests(repo, middle.strftime("%Y-%m-%d"), end.strftime("%Y-%m-%d"))
-        cumulative_prs = pd.concat([cumulative_prs1, cumulative_prs2])
+        annual_prs1 = _get_github_pull_requests_recurse(repo, start.strftime("%Y-%m-%d"), middle.strftime("%Y-%m-%d"))
+        annual_prs2 = _get_github_pull_requests_recurse(repo, middle.strftime("%Y-%m-%d"), end.strftime("%Y-%m-%d"))
+        annual_prs = pd.concat([annual_prs1, annual_prs2])
 
-    return cumulative_prs
+    return annual_prs
+
+
+def get_github_pull_requests(repo, start='2010-01-01', end='2030-01-01'):
+    annual_prs = _get_github_pull_requests_recurse(repo, start, end)
+    return annual_prs.cumsum()
