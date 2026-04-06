@@ -260,7 +260,7 @@ def get_github_forks(repo):
     return cumulative_forks
 
 
-def get_github_pull_requests(repo, start='2010-01-01', end='2030-01-01'):
+def _get_github_pull_requests(repo, start='2010-01-01', end='2030-01-01'):
     url = 'https://api.github.com/search/issues'
     headers = {
       'Authorization': "Bearer " + token,
@@ -278,8 +278,13 @@ def get_github_pull_requests(repo, start='2010-01-01', end='2030-01-01'):
         response = requests.get(url, params=dict(q=query, per_page=100, page=page), headers=headers)
         response.raise_for_status()
         json = response.json()
+
+        if json['total_count'] >= 1000:
+            # GH API doesn't let you fetch more than 1000 results
+            raise RuntimeError("query exceeds 1000 results; search a shorter time period")
+
         records += json['items']
-        if len(json['items']) < 100:
+        if len(records) >= json['total_count']:
             break
         page += 1
 
@@ -296,5 +301,21 @@ def get_github_pull_requests(repo, start='2010-01-01', end='2030-01-01'):
 
     df = pd.DataFrame(info)
     cumulative_prs = pd.Series(1, index=df['merged_at']).sort_index().cumsum().resample('a').max()
+
+    return cumulative_prs
+
+
+def get_github_pull_requests(repo, start='2010-01-01', end='2030-01-01'):
+    start = pd.to_datetime(start)
+    end = pd.to_datetime(end)
+    try:
+        cumulative_prs = _get_github_pull_requests(repo, start.strftime("%Y-%m-%d"), end.strftime("%Y-%m-%d"))
+    except RuntimeError:
+        # too many results; make smaller requests
+        diff = end - start
+        middle = start + diff / 2
+        cumulative_prs1 = get_github_pull_requests(repo, start.strftime("%Y-%m-%d"), middle.strftime("%Y-%m-%d"))
+        cumulative_prs2 = get_github_pull_requests(repo, middle.strftime("%Y-%m-%d"), end.strftime("%Y-%m-%d"))
+        cumulative_prs = pd.concat([cumulative_prs1, cumulative_prs2])
 
     return cumulative_prs
